@@ -33,10 +33,10 @@ FunBox API is a lightweight, no-nonsense REST API that delivers random entertain
 
 ## 🚀 Quick Start
 
-### Base URL
+### Base URL  && TEST
 
 ```
-http://localhost:3000/api/v1
+https://funbox-api.onrender.com
 ```
 
 ### Available Endpoints
