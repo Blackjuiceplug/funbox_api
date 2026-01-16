@@ -89,8 +89,8 @@ curl http://localhost:3000/api/v1/dadjoke
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/Blackjuiceplug/funbox-api.git
-cd funbox-api
+git clone https://github.com/Blackjuiceplug/funbox_api.git
+cd funbox_api
 ```
 
 2. **Install dependencies**
