@@ -1,0 +1,77 @@
+[
+  {
+    "text": "The only way to do great work is to love what you do.",
+    "author": "Steve Jobs",
+    "category": "work"
+  },
+  {
+    "text": "Life is what happens to you while you're busy making other plans.",
+    "author": "John Lennon",
+    "category": "life"
+  },
+  {
+    "text": "The future belongs to those who believe in the beauty of their dreams.",
+    "author": "Eleanor Roosevelt",
+    "category": "dreams"
+  },
+  {
+    "text": "It is during our darkest moments that we must focus to see the light.",
+    "author": "Aristotle",
+    "category": "inspiration"
+  },
+  {
+    "text": "Whoever is happy will make others happy too.",
+    "author": "Anne Frank",
+    "category": "happiness"
+  },
+  {
+    "text": "You must be the change you wish to see in the world.",
+    "author": "Mahatma Gandhi",
+    "category": "change"
+  },
+  {
+    "text": "Spread love everywhere you go. Let no one ever come to you without leaving happier.",
+    "author": "Mother Teresa",
+    "category": "love"
+  },
+  {
+    "text": "The only thing we have to fear is fear itself.",
+    "author": "Franklin D. Roosevelt",
+    "category": "courage"
+  },
+  {
+    "text": "Do not go where the path may lead, go instead where there is no path and leave a trail.",
+    "author": "Ralph Waldo Emerson",
+    "category": "leadership"
+  },
+  {
+    "text": "Be yourself; everyone else is already taken.",
+    "author": "Oscar Wilde",
+    "category": "individuality"
+  },
+  {
+    "text": "You miss 100% of the shots you don't take.",
+    "author": "Wayne Gretzky",
+    "category": "opportunity"
+  },
+  {
+    "text": "The best and most beautiful things in the world cannot be seen or even touched - they must be felt with the heart.",
+    "author": "Helen Keller",
+    "category": "beauty"
+  },
+  {
+    "text": "It is our choices that show what we truly are, far more than our abilities.",
+    "author": "J.K. Rowling",
+    "category": "choices"
+  },
+  {
+    "text": "The purpose of our lives is to be happy.",
+    "author": "Dalai Lama",
+    "category": "happiness"
+  },
+  {
+    "text": "Life is either a daring adventure or nothing at all.",
+    "author": "Helen Keller",
+    "category": "adventure"
+  }
+]

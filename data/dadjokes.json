@@ -1,0 +1,114 @@
+[
+  {
+    "text": "Why don't scientists trust atoms? Because they make up everything!",
+    "category": "science"
+  },
+  {
+    "text": "I'm reading a book on anti-gravity. It's impossible to put down!",
+    "category": "pun"
+  },
+  {
+    "setup": "Why did the scarecrow win an award?",
+    "punchline": "Because he was outstanding in his field!",
+    "category": "farm"
+  },
+  {
+    "text": "What do you call a fake noodle? An impasta!",
+    "category": "food"
+  },
+  {
+    "setup": "Why don't eggs tell jokes?",
+    "punchline": "They'd crack each other up!",
+    "category": "food"
+  },
+  {
+    "text": "What do you call a bear with no teeth? A gummy bear!",
+    "category": "animals"
+  },
+  {
+    "setup": "Why did the math book look so sad?",
+    "punchline": "Because it had too many problems.",
+    "category": "school"
+  },
+  {
+    "text": "I used to be a baker, but I couldn't make enough dough.",
+    "category": "occupation"
+  },
+  {
+    "setup": "What do you call a sleeping bull?",
+    "punchline": "A bulldozer!",
+    "category": "animals"
+  },
+  {
+    "text": "Why did the bicycle fall over? Because it was two-tired!",
+    "category": "transportation"
+  },
+  {
+    "setup": "What do you call a fish with no eyes?",
+    "punchline": "Fsh!",
+    "category": "animals"
+  },
+  {
+    "text": "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+    "category": "relationship"
+  },
+  {
+    "setup": "Why can't your nose be 12 inches long?",
+    "punchline": "Because then it would be a foot!",
+    "category": "body"
+  },
+  {
+    "text": "What do you call a cow with no legs? Ground beef!",
+    "category": "animals"
+  },
+  {
+    "setup": "What do you call a deer with no eyes?",
+    "punchline": "No idea!",
+    "category": "animals"
+  },
+  {
+    "text": "I'm on a seafood diet. I see food and I eat it.",
+    "category": "food"
+  },
+  {
+    "setup": "Why did the tomato turn red?",
+    "punchline": "Because it saw the salad dressing!",
+    "category": "food"
+  },
+  {
+    "text": "What do you call a belt made of watches? A waist of time!",
+    "category": "fashion"
+  },
+  {
+    "setup": "Why don't skeletons fight each other?",
+    "punchline": "They don't have the guts.",
+    "category": "horror"
+  },
+  {
+    "text": "I used to play piano by ear, but now I use my hands.",
+    "category": "music"
+  },
+  {
+    "setup": "What do you call cheese that isn't yours?",
+    "punchline": "Nacho cheese!",
+    "category": "food"
+  },
+  {
+    "text": "Why did the golfer bring two pairs of pants? In case he got a hole in one!",
+    "category": "sports"
+  },
+  {
+    "setup": "What do you call a man with a rubber toe?",
+    "punchline": "Roberto!",
+    "category": "name"
+  },
+  {
+    "text": "I'm reading a book about teleportation. It's bound to take me places.",
+    "category": "science"
+  },
+  {
+    "setup": "Why did the chicken cross the playground?",
+    "punchline": "To get to the other slide!",
+    "category": "chicken"
+  }
+]

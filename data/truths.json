@@ -1,0 +1,77 @@
+[
+  {
+    "text": "What's the most embarrassing thing you've ever done?",
+    "intensity": "high",
+    "category": "personal"
+  },
+  {
+    "text": "Have you ever cheated on a test?",
+    "intensity": "medium",
+    "category": "school"
+  },
+  {
+    "text": "What's the biggest lie you've ever told?",
+    "intensity": "high",
+    "category": "personal"
+  },
+  {
+    "text": "Have you ever had a crush on a teacher?",
+    "intensity": "medium",
+    "category": "school"
+  },
+  {
+    "text": "What's something you've stolen?",
+    "intensity": "high",
+    "category": "personal"
+  },
+  {
+    "text": "Have you ever pretended to be sick to get out of something?",
+    "intensity": "low",
+    "category": "social"
+  },
+  {
+    "text": "What's the meanest thing you've ever said to someone?",
+    "intensity": "high",
+    "category": "relationships"
+  },
+  {
+    "text": "Have you ever broken something and blamed someone else?",
+    "intensity": "medium",
+    "category": "honesty"
+  },
+  {
+    "text": "What's your biggest regret?",
+    "intensity": "high",
+    "category": "deep"
+  },
+  {
+    "text": "Have you ever snooped through someone else's phone?",
+    "intensity": "medium",
+    "category": "privacy"
+  },
+  {
+    "text": "What's the worst date you've ever been on?",
+    "intensity": "medium",
+    "category": "dating"
+  },
+  {
+    "text": "Have you ever lied to get out of trouble?",
+    "intensity": "low",
+    "category": "honesty"
+  },
+  {
+    "text": "What's something you're afraid to admit you like?",
+    "intensity": "medium",
+    "category": "personal"
+  },
+  {
+    "text": "Have you ever had a secret admirer?",
+    "intensity": "low",
+    "category": "romance"
+  },
+  {
+    "text": "What's the most trouble you've ever been in?",
+    "intensity": "high",
+    "category": "personal"
+  }
+]

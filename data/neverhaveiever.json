@@ -1,0 +1,78 @@
+[
+  {
+    "text": "pretended to be sick to get out of something",
+    "category": "social",
+    "difficulty": "easy"
+  },
+  {
+    "text": "kissed someone without knowing their name",
+    "category": "dating",
+    "nsfw": false,
+    "difficulty": "medium"
+  },
+  {
+    "text": "lied about my age",
+    "category": "personal",
+    "difficulty": "easy"
+  },
+  {
+    "text": "sung in the shower",
+    "category": "fun",
+    "difficulty": "easy"
+  },
+  {
+    "text": "danced like nobody's watching",
+    "category": "fun",
+    "difficulty": "easy"
+  },
+  {
+    "text": "cried during a movie",
+    "category": "emotional",
+    "difficulty": "easy"
+  },
+  {
+    "text": "sent a text to the wrong person",
+    "category": "embarrassing",
+    "difficulty": "medium"
+  },
+  {
+    "text": "fallen in love at first sight",
+    "category": "romance",
+    "difficulty": "medium"
+  },
+  {
+    "text": "had a celebrity crush",
+    "category": "fun",
+    "difficulty": "easy"
+  },
+  {
+    "text": "talked to myself",
+    "category": "personal",
+    "difficulty": "easy"
+  },
+  {
+    "text": "pretended to laugh at a joke I didn't get",
+    "category": "social",
+    "difficulty": "easy"
+  },
+  {
+    "text": "stayed up all night watching shows",
+    "category": "lifestyle",
+    "difficulty": "easy"
+  },
+  {
+    "text": "eaten dessert before dinner",
+    "category": "food",
+    "difficulty": "easy"
+  },
+  {
+    "text": "fallen asleep in class or at work",
+    "category": "school/work",
+    "difficulty": "medium"
+  },
+  {
+    "text": "had a dream about someone in this room",
+    "category": "personal",
+    "difficulty": "hard"
+  }
+]

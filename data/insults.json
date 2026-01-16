@@ -1,0 +1,13 @@
+{
+  "templates": [
+    "Thou art a {adjective} {noun}",
+    "You {verb} like a {adjective} {noun}",
+    "Thy wit is as {adjective} as a {noun}",
+    "Thou {adverb} {verb} like a {adjective} {noun}",
+    "Thou art more {adjective} than a {noun} full of {noun}"
+  ],
+  "adjectives": ["pribbling", "fool-born", "clay-brained", "dog-hearted", "onion-eyed", "poisonous", "bawdy", "beslubbering", "churlish", "dismal", "dreary", "fawning", "frothy", "gleeking", "goatish"],
+  "nouns": ["baggage", "canker-blossom", "clotpole", "coxcomb", "death-token", "dewberry", "flap-dragon", "flax-wench", "flirt-gill", "foot-licker", "fustilarian", "giglet", "gudgeon", "haggard", "harpy"],
+  "verbs": ["jest", "prate", "gabble", "mumble", "whine", "bellow", "blather", "drivel", "prattle", "yammer", "babble", "gibber", "maunder", "natter", "twaddle"],
+  "adverbs": ["foolishly", "grossly", "basely", "vilely", "currishly", "knavishly", "loathsomely", "lumpishly", "mammering", "mangled", "mewling", "paunchy", "pribbling", "rank", "reeky"]
+}

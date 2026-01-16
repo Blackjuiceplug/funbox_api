@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Distracted Boyfriend",
+    "description": "Guy checking out another girl while with girlfriend",
+    "format": "image",
+    "ideas": [
+      {
+        "text": "Me looking at pizza while eating salad",
+        "captionTop": "My diet",
+        "captionBottom": "Pizza"
+      },
+      {
+        "text": "Looking at weekend plans during work meeting",
+        "captionTop": "My productivity",
+        "captionBottom": "Weekend plans"
+      },
+      {
+        "text": "Checking phone during movie night",
+        "captionTop": "Watching movie with friends",
+        "captionBottom": "Checking Twitter"
+      }
+    ]
+  },
+  {
+    "name": "Drake Hotline Bling",
+    "description": "Drake rejecting vs accepting something",
+    "format": "image",
+    "ideas": [
+      {
+        "text": "Doing homework vs watching Netflix",
+        "captionTop": "No",
+        "captionBottom": "Yes"
+      },
+      {
+        "text": "Waking up early vs sleeping in",
+        "captionTop": "No",
+        "captionBottom": "Yes"
+      },
+      {
+        "text": "Eating healthy vs ordering takeout",
+        "captionTop": "No",
+        "captionBottom": "Yes"
+      }
+    ]
+  }
+]

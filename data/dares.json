@@ -1,0 +1,77 @@
+[
+  {
+    "text": "Do 10 pushups right now",
+    "difficulty": "easy",
+    "location": "anywhere"
+  },
+  {
+    "text": "Sing a song at full volume",
+    "difficulty": "medium",
+    "location": "anywhere"
+  },
+  {
+    "text": "Text your crush 'I like you'",
+    "difficulty": "hard",
+    "location": "anywhere"
+  },
+  {
+    "text": "Do your best impression of a celebrity",
+    "difficulty": "medium",
+    "location": "social"
+  },
+  {
+    "text": "Eat a spoonful of a condiment you dislike",
+    "difficulty": "hard",
+    "location": "anywhere"
+  },
+  {
+    "text": "Let someone draw on your face with a marker",
+    "difficulty": "medium",
+    "location": "social"
+  },
+  {
+    "text": "Do a handstand against a wall for 30 seconds",
+    "difficulty": "hard",
+    "location": "anywhere safe"
+  },
+  {
+    "text": "Call a random number and sing Happy Birthday",
+    "difficulty": "medium",
+    "location": "anywhere"
+  },
+  {
+    "text": "Wear your clothes backwards for the next hour",
+    "difficulty": "easy",
+    "location": "anywhere"
+  },
+  {
+    "text": "Dance like nobody's watching for 2 minutes",
+    "difficulty": "medium",
+    "location": "anywhere"
+  },
+  {
+    "text": "Speak in an accent for the next 10 minutes",
+    "difficulty": "medium",
+    "location": "social"
+  },
+  {
+    "text": "Let the group give you a new hairstyle",
+    "difficulty": "hard",
+    "location": "social"
+  },
+  {
+    "text": "Try to lick your elbow",
+    "difficulty": "easy",
+    "location": "anywhere"
+  },
+  {
+    "text": "Let someone post a silly picture of you on social media",
+    "difficulty": "hard",
+    "location": "social"
+  },
+  {
+    "text": "Do the chicken dance in a public place",
+    "difficulty": "medium",
+    "location": "public"
+  }
+]

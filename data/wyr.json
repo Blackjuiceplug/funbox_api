@@ -1,0 +1,78 @@
+[
+  {
+    "optionA": "always be 10 minutes late",
+    "optionB": "always be 20 minutes early",
+    "category": "lifestyle"
+  },
+  {
+    "optionA": "have a rewind button for your life",
+    "optionB": "have a pause button for your life",
+    "category": "superpower",
+    "difficulty": "hard"
+  },
+  {
+    "optionA": "be able to talk to animals",
+    "optionB": "be able to speak all foreign languages",
+    "category": "superpower"
+  },
+  {
+    "optionA": "never have internet again",
+    "optionB": "never have air conditioning again",
+    "category": "modern life"
+  },
+  {
+    "optionA": "be famous but hated",
+    "optionB": "be unknown but loved",
+    "category": "social"
+  },
+  {
+    "optionA": "have unlimited money but no friends",
+    "optionB": "have amazing friends but be broke",
+    "category": "life"
+  },
+  {
+    "optionA": "know when you will die",
+    "optionB": "know how you will die",
+    "category": "deep"
+  },
+  {
+    "optionA": "be able to fly but only 1 foot off the ground",
+    "optionB": "be able to become invisible but only when no one is looking",
+    "category": "superpower"
+  },
+  {
+    "optionA": "live in a world with no music",
+    "optionB": "live in a world with no movies",
+    "category": "entertainment"
+  },
+  {
+    "optionA": "have a nose that never stops growing",
+    "optionB": "have ears that never stop growing",
+    "category": "funny"
+  },
+  {
+    "optionA": "always have to tell the truth",
+    "optionB": "always have to lie",
+    "category": "ethics"
+  },
+  {
+    "optionA": "be able to read minds",
+    "optionB": "be able to see 24 hours into the future",
+    "category": "superpower"
+  },
+  {
+    "optionA": "never be able to eat your favorite food again",
+    "optionB": "only be able to eat your favorite food",
+    "category": "food"
+  },
+  {
+    "optionA": "have a billion dollars but age 50 years instantly",
+    "optionB": "stay your current age but be poor forever",
+    "category": "money"
+  },
+  {
+    "optionA": "be the funniest person in the room",
+    "optionB": "be the smartest person in the room",
+    "category": "personality"
+  }
+]
