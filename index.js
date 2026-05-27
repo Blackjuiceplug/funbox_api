@@ -9,250 +9,233 @@ app.use(cors());
 app.set('trust proxy', true);
 const PORT = process.env.PORT || 3000;
 
-// Serve static files from public folder
 app.use(express.static('public'));
 
-// Rate limiter: 120 requests per minute per IP
 const limiter = rateLimit({
   windowMs: 60 * 1000,
   max: 120,
   keyGenerator: (req, res) => req.headers['cf-connecting-ip'] || req.ip,
-  message: { error: "Too many requests, please try again later. (120 reqs/min/IP)" }
+  message: { 
+    status: "error", 
+    message: "Rate limit exceeded. Please try again later." 
+  }
 });
 
 app.use(limiter);
 
-// Load all data files from data folder
-const reasons = JSON.parse(fs.readFileSync('./data/reasons.json', 'utf-8'));
-const roasts = JSON.parse(fs.readFileSync('./data/roasts.json', 'utf-8'));
-const compliments = JSON.parse(fs.readFileSync('./data/compliments.json', 'utf-8'));
-const dadJokes = JSON.parse(fs.readFileSync('./data/dadjokes.json', 'utf-8'));
-const pickupLines = JSON.parse(fs.readFileSync('./data/pickuplines.json', 'utf-8'));
-const advice = JSON.parse(fs.readFileSync('./data/advice.json', 'utf-8'));
-const insults = JSON.parse(fs.readFileSync('./data/insults.json', 'utf-8'));
-const quotes = JSON.parse(fs.readFileSync('./data/quotes.json', 'utf-8'));
-const wyrQuestions = JSON.parse(fs.readFileSync('./data/wyr.json', 'utf-8'));
-const truths = JSON.parse(fs.readFileSync('./data/truths.json', 'utf-8'));
-const dares = JSON.parse(fs.readFileSync('./data/dares.json', 'utf-8'));
-const memeTemplates = JSON.parse(fs.readFileSync('./data/memetemplates.json', 'utf-8'));
-const neverHaveIEver = JSON.parse(fs.readFileSync('./data/neverhaveiever.json', 'utf-8'));
+// Normalized Data Loader
+const dataCache = {};
+const dataFiles = {
+  reasons: 'reasons.json',
+  roasts: 'roasts.json',
+  compliments: 'compliments.json',
+  dadJokes: 'dadjokes.json',
+  pickupLines: 'pickuplines.json',
+  advice: 'advice.json',
+  insults: 'insults.json',
+  quotes: 'quotes.json',
+  wyrQuestions: 'wyr.json',
+  truths: 'truths.json',
+  dares: 'dares.json',
+  memeTemplates: 'memetemplates.json',
+  neverHaveIEver: 'neverhaveiever.json'
+};
 
-// Helper functions
-function getRandomItem(array) {
+function loadData() {
+  Object.keys(dataFiles).forEach(key => {
+    try {
+      const filePath = path.join(__dirname, 'data', dataFiles[key]);
+      const content = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+      dataCache[key] = content;
+    } catch (err) {
+      console.error(`Error loading ${dataFiles[key]}:`, err);
+      dataCache[key] = [];
+    }
+  });
+}
+
+loadData();
+
+function getRandomItem(key) {
+  const array = dataCache[key];
+  if (!array || array.length === 0) return null;
   return array[Math.floor(Math.random() * array.length)];
+}
+
+function normalize(item) {
+  if (!item) return "No data available";
+  if (typeof item === 'string') return item;
+  return item.text || item.content || item.value || JSON.stringify(item);
 }
 
 function personalize(text, name) {
   return text.replace(/{name}/g, name);
 }
 
-// ========== API v1 ENDPOINTS ==========
+function sendResponse(res, data) {
+  res.json({
+    status: "success",
+    timestamp: new Date().toISOString(),
+    data: data
+  });
+}
+
 const v1 = express.Router();
 
-// 1. REJECTION SERVICE
 v1.get('/no', (req, res) => {
-  res.json({ reason: getRandomItem(reasons) });
+  sendResponse(res, { reason: normalize(getRandomItem('reasons')) });
 });
 
-// 2. ROAST SERVICE
 v1.get('/roast', (req, res) => {
-  res.json({ roast: getRandomItem(roasts) });
+  sendResponse(res, { roast: normalize(getRandomItem('roasts')) });
 });
 
 v1.get('/roast/:name', (req, res) => {
-  const roast = personalize(getRandomItem(roasts), req.params.name);
-  res.json({ roast, target: req.params.name });
+  const roast = personalize(normalize(getRandomItem('roasts')), req.params.name);
+  sendResponse(res, { roast, target: req.params.name });
 });
 
-// 3. COMPLIMENT SERVICE
 v1.get('/compliment', (req, res) => {
-  res.json({ compliment: getRandomItem(compliments) });
+  sendResponse(res, { compliment: normalize(getRandomItem('compliments')) });
 });
 
 v1.get('/compliment/:name', (req, res) => {
-  const compliment = personalize(getRandomItem(compliments), req.params.name);
-  res.json({ compliment, recipient: req.params.name });
+  const compliment = personalize(normalize(getRandomItem('compliments')), req.params.name);
+  sendResponse(res, { compliment, recipient: req.params.name });
 });
 
-// 4. DAD JOKES SERVICE
 v1.get('/dadjoke', (req, res) => {
-  const joke = getRandomItem(dadJokes);
-  // Handle both object and string formats
-  const jokeText = joke.text || joke;
-  res.json({ joke: jokeText });
+  sendResponse(res, { joke: normalize(getRandomItem('dadJokes')) });
 });
 
-// 5. PICKUP LINES SERVICE
 v1.get('/pickupline', (req, res) => {
-  const line = getRandomItem(pickupLines);
-  const lineText = line.text || line;
-  res.json({ line: lineText });
+  sendResponse(res, { line: normalize(getRandomItem('pickupLines')) });
 });
 
-// 6. ADVICE SERVICE
 v1.get('/advice', (req, res) => {
-  const adviceItem = getRandomItem(advice);
-  const adviceText = adviceItem.text || adviceItem;
-  res.json({ advice: adviceText });
+  sendResponse(res, { advice: normalize(getRandomItem('advice')) });
 });
 
-// 7. INSULT SERVICE
 v1.get('/insult', (req, res) => {
-  const template = getRandomItem(insults.templates);
+  const data = dataCache['insults'];
+  if (!data || !data.templates) return sendResponse(res, { insult: "Error generating insult" });
+  
+  const template = getRandomItem('insults').templates[Math.floor(Math.random() * data.templates.length)];
   const insult = template
-    .replace('{adjective}', getRandomItem(insults.adjectives))
-    .replace('{noun}', getRandomItem(insults.nouns))
-    .replace('{verb}', getRandomItem(insults.verbs));
-  res.json({ insult });
+    .replace('{adjective}', data.adjectives[Math.floor(Math.random() * data.adjectives.length)])
+    .replace('{noun}', data.nouns[Math.floor(Math.random() * data.nouns.length)])
+    .replace('{verb}', data.verbs[Math.floor(Math.random() * data.verbs.length)]);
+  sendResponse(res, { insult });
 });
 
-// 8. QUOTE SERVICE
 v1.get('/quote', (req, res) => {
-  const quote = getRandomItem(quotes);
-  const quoteText = quote.text || quote;
-  const quoteAuthor = quote.author || 'Unknown';
-  res.json({ quote: quoteText, author: quoteAuthor });
-});
-
-// 9. WOULD YOU RATHER SERVICE
-v1.get('/wyr', (req, res) => {
-  const wyr = getRandomItem(wyrQuestions);
-  const optionA = wyr.optionA || wyr.a || 'Option A';
-  const optionB = wyr.optionB || wyr.b || 'Option B';
-  res.json({ optionA, optionB });
-});
-
-// 10. TRUTH OR DARE SERVICE
-v1.get('/truth', (req, res) => {
-  const truth = getRandomItem(truths);
-  const question = truth.text || truth;
-  res.json({ question });
-});
-
-v1.get('/dare', (req, res) => {
-  const dare = getRandomItem(dares);
-  const challenge = dare.text || dare;
-  res.json({ challenge });
-});
-
-// 11. MEME IDEA SERVICE
-v1.get('/memeidea', (req, res) => {
-  const template = getRandomItem(memeTemplates);
-  const idea = getRandomItem(template.ideas);
-  const templateName = template.name || 'Unknown Template';
-  const ideaText = idea.text || idea;
-  res.json({ template: templateName, idea: ideaText });
-});
-
-// 12. NEVER HAVE I EVER SERVICE
-v1.get('/neverhaveiever', (req, res) => {
-  const statement = getRandomItem(neverHaveIEver);
-  const statementText = statement.text || statement;
-  res.json({ statement: `Never have I ever ${statementText}` });
-});
-
-// RANDOM SERVICE (COMBO)
-v1.get('/random', (req, res) => {
-  const services = [
-    () => ({ type: 'rejection', reason: getRandomItem(reasons) }),
-    () => ({ type: 'roast', roast: getRandomItem(roasts) }),
-    () => ({ type: 'compliment', compliment: getRandomItem(compliments) }),
-    () => ({ 
-      type: 'dadjoke', 
-      joke: getRandomItem(dadJokes).text || getRandomItem(dadJokes) 
-    }),
-    () => ({ 
-      type: 'quote', 
-      quote: getRandomItem(quotes).text || getRandomItem(quotes),
-      author: getRandomItem(quotes).author || 'Unknown'
-    }),
-    () => ({ 
-      type: 'advice', 
-      advice: getRandomItem(advice).text || getRandomItem(advice) 
-    })
-  ];
-  const randomService = getRandomItem(services);
-  res.json(randomService());
-});
-
-// API v1 DOCS ENDPOINT
-v1.get('/', (req, res) => {
-  res.json({
-    version: "1.0.0",
-    name: "Fun API Service",
-    endpoints: [
-      { method: 'GET', path: '/api/v1/no', description: 'Get a random rejection reason' },
-      { method: 'GET', path: '/api/v1/roast', description: 'Get roasted' },
-      { method: 'GET', path: '/api/v1/roast/:name', description: 'Roast someone specific' },
-      { method: 'GET', path: '/api/v1/compliment', description: 'Get a compliment' },
-      { method: 'GET', path: '/api/v1/compliment/:name', description: 'Compliment someone specific' },
-      { method: 'GET', path: '/api/v1/dadjoke', description: 'Get a dad joke' },
-      { method: 'GET', path: '/api/v1/pickupline', description: 'Get a pickup line' },
-      { method: 'GET', path: '/api/v1/advice', description: 'Get life advice' },
-      { method: 'GET', path: '/api/v1/insult', description: 'Get a creative insult' },
-      { method: 'GET', path: '/api/v1/quote', description: 'Get an inspirational quote' },
-      { method: 'GET', path: '/api/v1/wyr', description: 'Would you rather question' },
-      { method: 'GET', path: '/api/v1/truth', description: 'Truth question' },
-      { method: 'GET', path: '/api/v1/dare', description: 'Dare challenge' },
-      { method: 'GET', path: '/api/v1/memeidea', description: 'Meme template idea' },
-      { method: 'GET', path: '/api/v1/neverhaveiever', description: 'Never have I ever statement' },
-      { method: 'GET', path: '/api/v1/random', description: 'Random from all services' }
-    ],
-    limits: "120 requests per minute per IP",
-    docs: "Visit / for web interface"
+  const item = getRandomItem('quotes');
+  sendResponse(res, { 
+    quote: normalize(item), 
+    author: item.author || 'Unknown' 
   });
 });
 
-// Mount v1 router
+v1.get('/wyr', (req, res) => {
+  const wyr = getRandomItem('wyrQuestions');
+  sendResponse(res, { 
+    optionA: wyr.optionA || wyr.a || 'Option A', 
+    optionB: wyr.optionB || wyr.b || 'Option B' 
+  });
+});
+
+v1.get('/truth', (req, res) => {
+  sendResponse(res, { question: normalize(getRandomItem('truths')) });
+});
+
+v1.get('/dare', (req, res) => {
+  sendResponse(res, { challenge: normalize(getRandomItem('dares')) });
+});
+
+v1.get('/memeidea', (req, res) => {
+  const template = getRandomItem('memeTemplates');
+  const idea = getRandomItem('memeTemplates').ideas[Math.floor(Math.random() * template.ideas.length)];
+  sendResponse(res, { 
+    template: template.name || 'Unknown', 
+    idea: normalize(idea) 
+  });
+});
+
+v1.get('/neverhaveiever', (req, res) => {
+  sendResponse(res, { statement: `Never have I ever ${normalize(getRandomItem('neverHaveIEver'))}` });
+});
+
+v1.get('/random', (req, res) => {
+  const endpoints = ['no', 'roast', 'compliment', 'dadjoke', 'advice', 'quote'];
+  const target = endpoints[Math.floor(Math.random() * endpoints.length)];
+  
+  // Use internal routing to a simplified version of these
+  const results = {
+    no: { type: 'rejection', value: normalize(getRandomItem('reasons')) },
+    roast: { type: 'roast', value: normalize(getRandomItem('roasts')) },
+    compliment: { type: 'compliment', value: normalize(getRandomItem('compliments')) },
+    dadjoke: { type: 'dadjoke', value: normalize(getRandomItem('dadJokes')) },
+    advice: { type: 'advice', value: normalize(getRandomItem('advice')) },
+    quote: { type: 'quote', value: normalize(getRandomItem('quotes')) }
+  };
+  sendResponse(res, results[target]);
+});
+
+v1.get('/', (req, res) => {
+  res.json({
+    version: "1.1.0",
+    name: "Funbox API Service",
+    endpoints: [
+      { method: 'GET', path: '/api/v1/no', description: 'Rejection reason' },
+      { method: 'GET', path: '/api/v1/roast', description: 'Random roast' },
+      { method: 'GET', path: '/api/v1/roast/:name', description: 'Targeted roast' },
+      { method: 'GET', path: '/api/v1/compliment', description: 'Random compliment' },
+      { method: 'GET', path: '/api/v1/compliment/:name', description: 'Targeted compliment' },
+      { method: 'GET', path: '/api/v1/dadjoke', description: 'Dad joke' },
+      { method: 'GET', path: '/api/v1/pickupline', description: 'Pickup line' },
+      { method: 'GET', path: '/api/v1/advice', description: 'Life advice' },
+      { method: 'GET', path: '/api/v1/insult', description: 'Creative insult' },
+      { method: 'GET', path: '/api/v1/quote', description: 'Inspirational quote' },
+      { method: 'GET', path: '/api/v1/wyr', description: 'Would you rather' },
+      { method: 'GET', path: '/api/v1/truth', description: 'Truth question' },
+      { method: 'GET', path: '/api/v1/dare', description: 'Dare challenge' },
+      { method: 'GET', path: '/api/v1/memeidea', description: 'Meme template idea' },
+      { method: 'GET', path: '/api/v1/neverhaveiever', description: 'Never have I ever' },
+      { method: 'GET', path: '/api/v1/random', description: 'Randomized response' }
+    ]
+  });
+});
+
 app.use('/api/v1', v1);
 
-// API root endpoint
 app.get('/api', (req, res) => {
   res.json({
-    message: "Fun API Service",
-    versions: {
-      v1: "/api/v1",
-      current: "v1",
-      deprecated: []
-    },
+    message: "Funbox API Service",
+    versions: { v1: "/api/v1", current: "v1" },
     web_interface: "/"
   });
 });
 
-// Serve HTML UI at root
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// 404 handler for API routes
 app.use('/api', (req, res) => {
-  res.status(404).json({
-    error: "API endpoint not found",
-    message: "Try /api/v1 for available endpoints",
-    current_version: "/api/v1"
-  });
+  res.status(404).json({ status: "error", message: "Endpoint not found" });
 });
 
-// Catch-all 404
 app.use((req, res) => {
   if (req.accepts('html')) {
     res.redirect('/');
   } else {
-    res.status(404).json({
-      error: "Not found",
-      message: "Try /api/v1 for API or / for web interface"
-    });
+    res.status(404).json({ status: "error", message: "Not found" });
   }
 });
 
-// Start server
 app.listen(PORT, () => {
   console.log(`
-  🚀 Fun API Service launched!
+  ⚡ Funbox API v1.1.0 Online
   📍 Port: ${PORT}
-  🌐 Web UI: http://localhost:${PORT}
-  🔌 API v1: http://localhost:${PORT}/api/v1
-  📚 API Docs: http://localhost:${PORT}/api/v1
-  ⚡ Rate limit: 120/min per IP
+  🌐 http://localhost:${PORT}
   `);
 });
